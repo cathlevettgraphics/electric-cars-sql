@@ -58,7 +58,7 @@ postsMountNode.addEventListener('click', (e) => {
   // DELETE
   if (target && target.matches('.btn.btn-delete')) {
     let deleteID = target.closest('button').dataset.id;
-    // !! convert to number as database is a number key
+    // convert to number as database is a number key
     deleteID = parseInt(deleteID);
 
     const index = allCars.findIndex((item) => item.id === deleteID);
@@ -74,7 +74,7 @@ postsMountNode.addEventListener('click', (e) => {
   if (target && target.matches('.btn.btn-update')) {
     // get car by data-id
     let carId = target.closest('button').dataset.id;
-    // !! convert to number as database is a number key
+    // convert to number as database id is number
     carId = parseInt(carId);
 
     const carToUpdate = allCars.find((car) => car.id === carId);

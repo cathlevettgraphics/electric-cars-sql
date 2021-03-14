@@ -99,6 +99,8 @@ export async function updateCar(carId, changes) {
       throw response;
     }
 
+    fetchData(CARS_ENDPOINT);
+
     GrowlNotification.notify({
       title: 'Updates applied!',
       description: 'Cool cars, man!',

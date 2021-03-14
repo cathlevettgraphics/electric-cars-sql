@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- normalise -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.css">
+  <!-- Generics -->
+  <link rel="stylesheet" href="./styles/generics.css">
+  <!-- Growl -->
+  <link rel="stylesheet" href="https://www.cssscript.com/demo/beautiful-growl-notification/colored-theme.min.css">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="./fonts/fonts.css">
+  <!-- style -->
+  <link rel="stylesheet" href="./styles/style.css">
+  <!-- Growl -->
+  <script src="https://www.cssscript.com/demo/beautiful-growl-notification/growl-notification.min.js" defer></script>
+  <script src="./js/appController.js" type="module"></script>
+
+  <title>Cool car, man!</title>
+</head>
+
+<body>
+  <header>
+    <nav class="main-nav">
+      <a href="#" class="main-logo">Compare your car</a>
+    </nav>
+    <div class="main-head">
+      <div class="main-head-container">
+        <h1 class="main-head-text">Cool car, man!</h1>
+        <p class="main-head-strap">Add, update and delete your car from our database – how does your car stack up?</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+
+    <div class="form-wrapper">
+      <div class="form-container">
+        <form class="car-entry-form" name="car-entry-form">
+          <h2>Create your car</h2>
+          <div class="enter-car">
+            <label for="name">Enter car</label>
+            <input type="text" name="name" id="name" placeholder="Enter car" required>
+          </div>
+
+          <div class="enter-bhp">
+            <label for="bhp">Enter bhp</label>
+            <input type="text" name="bhp" id="bhp" placeholder="Enter bhp" required>
+          </div>
+
+          <div class="enter-img">
+            <label for="avatar_url">Image url</label>
+            <input type="text" name="avatar_url" id="avatar_url" placeholder="Enter image url" required>
+          </div>
+
+          <div class="btn-container">
+            <button class="btn btn-submit-car" type="submit">Enter car</button>
+            <button class="btn btn-reset-car" type="reset">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Update -->
+      <div class="form-container form-container-update" id="update-form">
+        <form class="car-entry-form-update" name="car-entry-form-update">
+          <h2>Update your car</h2>
+          <div class="update-car">
+            <label for="name-update">Update car</label>
+            <input type="text" name="name" id="name-update" placeholder="Update car" required>
+          </div>
+
+          <div class="update-bhp">
+            <label for="bhp-update">Update bhp</label>
+            <input type="text" name="bhp" id="bhp-update" placeholder="Update bhp" required>
+          </div>
+
+          <div class="update-img">
+            <label for="avatar_url-update">Update url</label>
+            <input type="text" name="avatar_url" id="avatar_url-update" placeholder="Update image url" required>
+          </div>
+
+          <div class="btn-container">
+            <button class="btn btn-submit-car" type="submit">Enter car</button>
+            <button class="btn btn-reset-car" type="reset">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="posts-wrapper">
+      <h2 class="posts-head">Check your cars out!</h2>
+      <div class="posts-container" id="posts-target">
+        <!-- <p class="no-data-entered">No cars added – what are you waiting for! Add some cool cars</p> -->
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <nav class="footer-nav">
+      <a href="#" class="main-logo">Compare your car</a>
+      <p class="main-logo-sub-text"><small class="main-logo-sub-text">&copy; 2021 <a
+            href="https://cathlevett-graphics.netlify.app/" class="site-link"> cathlevettgraphics</a></small></p>
+    </nav>
+  </footer>
+
+
+
+</body>
+
+</html>

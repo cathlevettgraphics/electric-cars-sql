@@ -1,0 +1,363 @@
+$space-cadet: hsla(240, 27%, 18%, 1);
+$independence: hsla(232, 17%, 35%, 1);
+$independence-tint: hsla(232, 17%, 35%, 0.3);
+
+$amethyst: hsla(267, 72%, 63%, 1);
+$magenta-crayola: hsla(324, 84%, 65%, 1);
+$minion-yellow: hsla(52, 99%, 62%, 1);
+$capri: hsla(195, 100%, 49%, 1);
+$sea-green-crayola: hsla(172, 100%, 48%, 1);
+$sea-green-crayola-tint: hsla(172, 100%, 48%, 0.3);
+
+// breakpoint
+$desktop: 961px;
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: $space-cadet;
+}
+
+.main-nav {
+  background-color: $minion-yellow;
+  padding: 15px 20px;
+}
+
+.main-logo {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.6rem;
+  display: block;
+}
+
+.main-head {
+  background-color: $sea-green-crayola;
+  margin-block-end: 40px;
+}
+
+.main-head-container {
+  max-inline-size: 335px;
+  margin: 0 auto;
+  padding: 20px 0 0 0;
+}
+
+@media (min-width: $desktop) {
+  .main-head-container {
+    max-inline-size: 900px;
+    text-align: center;
+    padding: 60px 0 0 0;
+  }
+}
+
+.main-head-text {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 7rem;
+}
+
+@media (min-width: $desktop) {
+  .main-head-text {
+    font-size: 8rem;
+  }
+}
+
+.main-head-strap {
+  font-size: 2rem;
+  line-height: 1.5;
+  padding: 0 0 40px 0;
+}
+
+@media (min-width: $desktop) {
+  .main-head-strap {
+    max-inline-size: 520px;
+    text-align: center;
+    margin: 0 auto;
+    padding-block-end: 80px;
+  }
+}
+
+.form-wrapper {
+  max-inline-size: 335px;
+  margin: 0 auto;
+  margin-block-end: 60px;
+}
+
+@media (min-width: $desktop) {
+  .form-wrapper {
+    max-inline-size: 620px;
+    margin-block-end: 60px;
+  }
+}
+
+.form-container {
+  width: 100%;
+  margin-block-end: 30px;
+}
+
+@media (min-width: $desktop) {
+  .form-container {
+    grid-column-start: span 4;
+    margin-block-end: 50px;
+  }
+}
+
+// !! Hide car-entry-form-update on load
+.car-entry-form-update {
+  display: none;
+}
+
+// !! Show car-entry-form-update on update click
+.car-entry-form-update-show {
+  display: block;
+}
+
+.car-entry-form-hide {
+  display: none;
+}
+
+.car-entry-form h2,
+.car-entry-form-update h2 {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 4rem;
+}
+
+@media (min-width: $desktop) {
+  .car-entry-form h2,
+  .car-entry-form-update h2 {
+    font-size: 3rem;
+  }
+}
+
+.car-entry-form label,
+.car-entry-form-update label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: block;
+  text-transform: uppercase;
+  padding: 0 15px;
+  margin-block-end: 7px;
+}
+
+.car-entry-form input,
+.car-entry-form-update input {
+  font-size: 1.4rem;
+  width: 100%;
+  padding: 15px;
+  border-radius: 50px;
+  margin-block-end: 15px;
+  border: 0 solid #000;
+  outline: 0;
+  background-color: $sea-green-crayola-tint;
+}
+
+.enter-img,
+.update-img {
+  margin-block-end: 20px;
+}
+
+.car-entry-form input:focus,
+.car-entry-form-update input:focus {
+  background-color: $sea-green-crayola;
+}
+
+.car-entry-form button,
+.car-entry-form-update button {
+  font-size: 1.6rem;
+  font-weight: 600;
+  width: 49%;
+  padding: 20px 0;
+  background-color: $minion-yellow;
+  border-radius: 50px;
+  border: 0;
+  outline: 0;
+  margin-block-end: 15px;
+}
+
+.car-entry-form button:focus,
+.car-entry-form-update button:focus,
+.car-entry-form button:hover,
+.car-entry-form-update button:hover {
+  background-color: $independence;
+  cursor: pointer;
+  color: #fff;
+}
+
+// CAR GRID
+
+.posts-wrapper {
+  max-inline-size: 335px;
+  margin: 0 auto;
+}
+
+@media (min-width: $desktop) {
+  .posts-wrapper {
+    max-inline-size: 100vw;
+    text-align: center;
+  }
+}
+
+.posts-head {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 4rem;
+}
+
+.car-list {
+  display: block;
+}
+
+@media (min-width: $desktop) {
+  .car-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto, 1fr);
+    grid-gap: 20px;
+    max-inline-size: 960px;
+    margin: 0 auto;
+    margin-block-end: 30px;
+  }
+}
+
+.car-item {
+  border-bottom: 1px dashed $independence;
+  padding-block-end: 30px;
+  margin-block-end: 30px;
+
+  h3 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3rem;
+    color: $capri;
+    margin-block-end: 10px;
+  }
+
+  p {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2rem;
+    color: $independence;
+    text-transform: uppercase;
+  }
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+    margin-block-end: 20px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      width: 100%;
+    }
+  }
+
+  .btn {
+    padding: 15px;
+    border-radius: 25px;
+    font-weight: 600;
+    width: 98%;
+    border: 0;
+    outline: none;
+  }
+
+  .btn-update {
+    background-color: $minion-yellow;
+  }
+
+  .btn-delete {
+    background-color: $magenta-crayola;
+    color: #fff;
+  }
+
+  .btn-update:focus,
+  .btn-delete:focus,
+  .btn-update:hover,
+  .btn-delete:hover {
+    background-color: $independence;
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+  }
+}
+
+.car-item:last-child {
+  border-bottom: 0px;
+}
+
+@media (min-width: $desktop) {
+  .car-item {
+    padding-block-end: 0px;
+    margin-block-end: 20px;
+    border-top: 3px solid $independence;
+    padding-block-start: 10px;
+    border-bottom: 0;
+
+    h3 {
+      text-align: left;
+    }
+
+    p {
+      text-align: left;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        width: 100%;
+      }
+    }
+
+    .btn {
+      padding: 15px;
+      border: none;
+      outline: none;
+      border-radius: 25px;
+      font-weight: 600;
+      width: 98%;
+    }
+
+    .btn-update {
+      background-color: $minion-yellow;
+    }
+
+    .btn-delete {
+      background-color: $independence-tint;
+      color: $space-cadet;
+    }
+
+    .btn-update:focus,
+    .btn-delete:focus,
+    .btn-update:hover,
+    .btn-delete:hover {
+      background-color: $independence;
+      cursor: pointer;
+      color: #fff;
+      outline: none;
+      border: none;
+    }
+  }
+}
+
+// No data entered state
+.no-data-entered {
+  margin: 0 auto;
+  background-color: $sea-green-crayola-tint;
+  font-size: 1.8rem;
+  font-weight: 600;
+  max-inline-size: 620px;
+  padding: 20px;
+  border-radius: 5px;
+  margin-block-end: 40px;
+}
+
+// Footer
+
+.footer-nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: $minion-yellow;
+  padding: 15px 20px;
+}
+
+.main-logo-sub-text {
+  margin: 0;
+}

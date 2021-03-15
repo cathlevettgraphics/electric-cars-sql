@@ -68,7 +68,6 @@ app.get('/api/v1/cars/join/owner', (req, res) => {
 // CREATE
 app.post('/api/v1/cars', (req, res) => {
   console.log('Adding', req.body);
-
   const fields = Object.keys(req.body); // again, doing this for the whole of req.body is a bad idea. re.body.data would be a better place to put it.
   const columns = fields.join(', ');
   const values = [];
@@ -78,19 +77,18 @@ app.post('/api/v1/cars', (req, res) => {
       values.push(value);
     }
   }
-
   const fullQuery = `INSERT INTO cars (${columns}) VALUES (${values
     .map((v, i) => `$${i + 1}`)
-    .join(', ')})`;
+    .join(', ')}) RETURNING *`;
   console.log('fullQuery', fullQuery);
   console.log('values', values);
-
   pool.query(fullQuery, values, (error, results) => {
     if (error) {
       console.log('err', error);
       return res.status(500).send(error);
     }
-    res.status(201).send(results);
+    console.log('results', results);
+    res.status(201).send(results.rows[0]);
   });
 });
 
@@ -101,7 +99,7 @@ app.put('/api/v1/cars/:id', (req, res) => {
   const data = req.body;
 
   const keys = Object.keys(data);
-  console.log('keys', keys);
+  // console.log('keys', keys);
 
   // 'UPDATE cars SET name = $1, email = $2 WHERE id = $3'
 
@@ -109,19 +107,22 @@ app.put('/api/v1/cars/:id', (req, res) => {
 
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
-      setStr += `${key} = '${data[key]}'`; // <-- like this
+      setStr += `${key} = '${data[key]}', `; // <-- like this
     }
   }
+  setStr = setStr.slice(0, -2); // 'remove final comma and space
+  const query = `UPDATE cars SET ${setStr} WHERE id = ${carId} RETURNING *`;
 
-  const query = `UPDATE cars SET ${setStr} WHERE id = ${carId}`;
   console.log('full query', query);
 
   pool.query(query, (error, results) => {
     if (error) {
-      throw error;
+      // throw error; // don't throw the error or you'll crash the app! XD
+      console.log(error);
+      return res.status(500).send(error);
     }
     console.log('results', results);
-    res.status(200).send(`User modified with ID: ${carId}`);
+    res.status(200).json(results.rows[0]);
   });
 });
 
@@ -129,7 +130,7 @@ app.put('/api/v1/cars/:id', (req, res) => {
 app.delete('/api/v1/cars/:id', (req, res) => {
   const { id: carId } = req.params;
 
-  console.log('carToBeDeleted', carId);
+  // console.log('carToBeDeleted', carId);
   pool.query('DELETE FROM cars WHERE id = $1', [carId], (error) => {
     if (error) {
       return res.status(500).send(error);
@@ -147,16 +148,13 @@ app.listen(PORT, () => {
 });
 
 // CAR
-
 // id  name             bhp          owner
 // 1   ferrari          300            6*
 
 // OWNERS
-
 // id  firstname     lastname
 // 6*    fred          bloggs
 
 // CARS REPORT
-
 // id  firstname     lastname    make             bhp          owner
 // 6*    fred          bloggs     ferrari          300            6

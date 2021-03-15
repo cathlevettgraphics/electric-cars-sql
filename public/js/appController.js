@@ -38,9 +38,8 @@ carForm.addEventListener('submit', (e) => {
   const data = Object.fromEntries(formData);
   // console.log(data);
   addCar(data);
-  fetchData(CARS_ENDPOINT);
-  renderCarList(allCars);
-
+  // fetchData(CARS_ENDPOINT);
+  // renderCarList(allCars);
   carForm.reset();
 });
 
@@ -60,14 +59,8 @@ postsMountNode.addEventListener('click', (e) => {
     let deleteID = target.closest('button').dataset.id;
     // convert to number as database is a number key
     deleteID = parseInt(deleteID);
-
-    const index = allCars.findIndex((item) => item.id === deleteID);
-    allCars.splice(index, 1);
-
-    target.closest('li').remove();
-
-    deleteCar(deleteID);
-    renderCarList(allCars);
+    deleteCar(deleteID, () => target.closest('li').remove()); // easier to just remove the dom node than do a whole re-render
+    // renderCarList(allCars);
   }
 
   // UPDATE
@@ -76,7 +69,7 @@ postsMountNode.addEventListener('click', (e) => {
     let carId = target.closest('button').dataset.id;
     // convert to number as database id is number
     carId = parseInt(carId);
-
+    console.log('updating carId', carId);
     const carToUpdate = allCars.find((car) => car.id === carId);
     // console.log('The car to update is: ', carToUpdate);
     // Populate update form
@@ -96,10 +89,8 @@ carFormUpdate.addEventListener('submit', (e) => {
   const formData = new FormData(carFormUpdate);
   const newData = Object.fromEntries(formData);
   carFormUpdate.reset();
-
-  updateCar(originalCar._id, newData);
-  renderCarList();
-
+  updateCar(originalCar.id, newData); // swap _id for id
+  // renderCarList();
   carFormUpdate.classList.remove('car-entry-form-update-show');
   carForm.classList.remove('car-entry-form-hide');
 });

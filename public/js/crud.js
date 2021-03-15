@@ -17,12 +17,11 @@ export async function fetchData(CARS_ENDPOINT) {
 }
 
 // Render
-export function renderCarList() {
-  if (allCars.length) {
+export function renderCarList(cars = allCars) {
+  if (cars.length) {
     const list = document.createElement('ul');
     list.classList.add('car-list');
-
-    for (const { name, bhp, avatar_url, id } of allCars) {
+    for (const { name, bhp, avatar_url, id } of cars) {
       const li = document.createElement('li');
       li.classList.add('car-item');
       li.innerHTML = `
@@ -58,12 +57,9 @@ export async function addCar(data) {
     if (response.status === 500) {
       throw response;
     }
-
     const newCarData = await response.json();
-
     allCars.push(newCarData);
-    renderCarList(allCars);
-
+    renderCarList();
     GrowlNotification.notify({
       title: 'Cool car, man!',
       description: "We've added it to your garage",
@@ -98,9 +94,11 @@ export async function updateCar(carId, changes) {
     if (!response.ok) {
       throw response;
     }
-
-    fetchData(CARS_ENDPOINT);
-
+    const updatedCar = await response.json();
+    const idx = allCars.findIndex(({ id }) => id === updatedCar.id);
+    allCars = [...allCars.slice(0, idx), updatedCar, ...allCars.slice(idx + 1)];
+    // fetchData(CARS_ENDPOINT); // use RETURN * in the SQL query to avoid second fetch
+    renderCarList();
     GrowlNotification.notify({
       title: 'Updates applied!',
       description: 'Cool cars, man!',
@@ -121,7 +119,7 @@ export async function updateCar(carId, changes) {
 }
 
 // Delete
-export async function deleteCar(idToDelete) {
+export async function deleteCar(idToDelete, cb) {
   const itemToDelete = `${CARS_ENDPOINT}${idToDelete}`;
 
   try {
@@ -131,9 +129,14 @@ export async function deleteCar(idToDelete) {
     if (!response.ok) {
       throw response;
     }
-
-    fetchData(CARS_ENDPOINT);
-
+    // fetchData(CARS_ENDPOINT); // no need here...
+    const idx = allCars.findIndex(({ id }) => {
+      console.log(id, idToDelete);
+      return id === idToDelete;
+    });
+    allCars = [...allCars.slice(0, idx), ...allCars.slice(idx + 1)];
+    // renderCarList();
+    cb(); // easier to just remove the dom node than do a whole re-render
     GrowlNotification.notify({
       title: 'Yeah, that car sucked!',
       description: "We've deleted it",
